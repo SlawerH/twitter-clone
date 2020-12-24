@@ -3,5 +3,5 @@
 @section("title", "Home")
 
 @section('content')
-    test
+    Welcome back, {{ Auth::user() ? Auth::user()->username : "Guest" }}
 @endsection
