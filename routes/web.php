@@ -24,4 +24,9 @@ Route::middleware("guest")->group(function() {
     Route::post('/login', "LoginController@store")->name("login");
 });
 
-Route::get('/logout', "LoginController@logout")->middleware("auth")->name("logout");
+Route::middleware("auth")->group(function() {
+    Route::get('/logout', "LoginController@logout")->name("logout");
+
+    Route::get("/tweet", "TweetController@index")->name("tweet");
+    Route::post("/tweet", "TweetController@store")->name("tweet");
+});

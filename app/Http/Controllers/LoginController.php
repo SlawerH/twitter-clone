@@ -16,12 +16,6 @@ class LoginController extends Controller
     }
 
     public function store(LoginRequest $req) {
-        // Check if the user exists
-
-        // $user = User::where([
-        //     ["email", $req->email],
-        // ])->first();
-
         if(Auth::attempt($req->only(["email", "password"]))) {
             return redirect()->route("index");
         } else {
