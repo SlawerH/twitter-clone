@@ -18,6 +18,7 @@ class IndexController extends Controller
         if(Auth::check()) {
             $tweets = cache()->remember('tweets_' . Auth::id(), 5, function () {
                 return DB::table("tweets")
+                    ->select("tweets.*", "users.username")
                     ->join("users", "users.id", "=", "tweets.user_id")
                     ->orderBy("tweets.id", "DESC")
                     ->get();;

@@ -12,6 +12,14 @@
                     <h5 class="card-title">From <u><a href="/profile/{{ $tweet->user_id }}" class="text-bold">{{ $tweet->username }}</a></u></h5>
                     <p class="text-muted">{{ $tweet->created_at }}</p>
                     <p class="card-text">{{ $tweet->content }}</p>
+                    @if (Auth::id() === $tweet->user_id)
+                        <form method="POST" action="{{ route("delete_tweet", $tweet->id) }}">
+                            @csrf
+                            @method("delete")
+                            
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    @endif
                 </div>
             </div>
         @endforeach

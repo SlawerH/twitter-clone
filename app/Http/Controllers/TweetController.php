@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\TweetRequest;
-
+use Illuminate\Support\Facades\Session;
 use App\Models\Tweet;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +19,18 @@ class TweetController extends Controller
             "content" => $request->content,
             "user_id" => Auth::id()
         ]);
+
+        return redirect()->route("index");
+    }
+
+    public function destroy(Tweet $tweet) {
+        if($tweet->user_id !== Auth::id()) {
+            return abort(403);
+        }
+
+        $tweet = Tweet::find($tweet->id)->delete();
+
+        Session::flash("alert-success", "Successfully deleted");
 
         return redirect()->route("index");
     }

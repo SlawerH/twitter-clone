@@ -18,15 +18,16 @@ Route::get('/', "IndexController@index")->name("index");
 
 Route::middleware("guest")->group(function() {
     Route::get('/register', "RegisterController@index")->name("register");
-    Route::post('/register', "RegisterController@store")->name("register");
+    Route::post('/register', "RegisterController@store");
     
     Route::get('/login', "LoginController@index")->name("login");
-    Route::post('/login', "LoginController@store")->name("login");
+    Route::post('/login', "LoginController@store");
 });
 
 Route::middleware("auth")->group(function() {
     Route::get('/logout', "LoginController@logout")->name("logout");
 
     Route::get("/tweet", "TweetController@index")->name("tweet");
-    Route::post("/tweet", "TweetController@store")->name("tweet");
+    Route::post("/tweet", "TweetController@store");
+    Route::delete("/tweet/{tweet}", "TweetController@destroy")->name("delete_tweet");
 });
