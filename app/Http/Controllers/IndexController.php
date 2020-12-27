@@ -19,11 +19,14 @@ class IndexController extends Controller
             $tweets = cache()->remember('tweets_' . Auth::id(), 5, function () {
                 $followingList = Auth::user()->followingList();
     
+                $followingList = $followingList->pluck("followed_id");
+                $followingList[] = Auth::id();
+
                 return $tweets = DB::table("tweets")
                     ->select("tweets.*", "users.username")
                     ->join("users", "users.id", "=", "tweets.user_id")
                     ->orderBy("tweets.id", "DESC")
-                    ->whereIn("tweets.user_id", $followingList->pluck("followed_id"))->latest()
+                    ->whereIn("tweets.user_id", $followingList)->latest()
                     ->get();
             });
             
