@@ -20,7 +20,7 @@ class TweetController extends Controller
             "user_id" => Auth::id()
         ]);
 
-        return redirect()->route("index");
+        return redirect()->route("index"); // TODO: redirect to tweet
     }
 
     public function destroy(Tweet $tweet) {
@@ -32,6 +32,6 @@ class TweetController extends Controller
 
         Session::flash("alert-success", "Successfully deleted");
 
-        return redirect()->route("index");
+        return back();
     }
 }

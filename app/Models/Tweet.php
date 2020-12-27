@@ -18,4 +18,8 @@ class Tweet extends Model
         'content',
         'user_id'
     ];
+
+    public function author() {
+        return $this->belongsTo(User::class);
+    }
 }

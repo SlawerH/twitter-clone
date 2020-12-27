@@ -17,12 +17,16 @@ class IndexController extends Controller
         
         if(Auth::check()) {
             $tweets = cache()->remember('tweets_' . Auth::id(), 5, function () {
-                return DB::table("tweets")
+                $followingList = Auth::user()->followingList();
+    
+                return $tweets = DB::table("tweets")
                     ->select("tweets.*", "users.username")
                     ->join("users", "users.id", "=", "tweets.user_id")
                     ->orderBy("tweets.id", "DESC")
-                    ->get();;
+                    ->whereIn("tweets.user_id", $followingList->pluck("followed_id"))->latest()
+                    ->get();
             });
+            
         }
 
         return view("index", compact("tweets"));

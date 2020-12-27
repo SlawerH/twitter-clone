@@ -31,4 +31,33 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function following(User $user) {
+        return Follow::where([
+            ["follower_id", $this->id],
+            ["followed_id", $user->id],
+        ])->first() !== null;
+    }
+
+    public function followingList() {
+        return Follow::where("follower_id", $this->id)->get();
+    }
+
+    public function follow(User $user) {
+        Follow::create([
+            "follower_id" => $this->id,
+            "followed_id" => $user->id
+        ]);
+    }
+
+    public function unfollow(User $user) {
+        Follow::where([
+            ["follower_id", $this->id],
+            ["followed_id", $user->id],
+        ])->limit(1)->delete();
+    }
+
+    public function tweets() {
+        return $this->hasMany(Tweet::class);
+    }
 }

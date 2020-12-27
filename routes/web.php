@@ -30,4 +30,9 @@ Route::middleware("auth")->group(function() {
     Route::get("/tweet", "TweetController@index")->name("tweet");
     Route::post("/tweet", "TweetController@store");
     Route::delete("/tweet/{tweet}", "TweetController@destroy")->name("delete_tweet");
+
+    Route::get("/follow/{user}", "FollowController@follow")->name("follow");
+    Route::get("/unfollow/{user}", "FollowController@unfollow")->name("unfollow");
 });
+
+Route::get("/profile/{user}", "ProfileController@index")->name("profile");

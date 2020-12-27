@@ -42,6 +42,9 @@
 					<ul class="navbar-nav ml-auto mb-2 mb-lg-0">
 						@if (Auth::check())
 							<li class="nav-item">
+								<a class="nav-link" href="{{ route("profile", Auth::id()) }}">Profile</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="{{ route("logout") }}">Logout</a>
 							</li>
 						@else
