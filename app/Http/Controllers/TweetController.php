@@ -14,6 +14,12 @@ class TweetController extends Controller
         return view("tweet");
     }
 
+    public function show(Tweet $tweet) {
+        $user = $tweet->author()->first();
+
+        return view("view", compact("tweet", "user"));
+    }
+
     public function store(TweetRequest $request) {
         $tweet = Tweet::create([
             "content" => $request->content,

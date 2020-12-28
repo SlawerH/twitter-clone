@@ -32,6 +32,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // Following part
     public function following(User $user) {
         return Follow::where([
             ["follower_id", $this->id],
@@ -54,6 +55,28 @@ class User extends Authenticatable
         Follow::where([
             ["follower_id", $this->id],
             ["followed_id", $user->id],
+        ])->limit(1)->delete();
+    }
+
+    // Like part
+    public function liking(Tweet $tweet) {
+        return Like::where([
+            ["tweet_id", $tweet->id],
+            ["user_id", $this->id]
+        ])->first() !== null;
+    }
+
+    public function like(Tweet $tweet) {
+        Like::create([
+            "tweet_id" => $tweet->id,
+            "user_id" => $this->id
+        ]);
+    }
+
+    public function unlike(Tweet $tweet) {
+        Like::where([
+            ["tweet_id", $tweet->id],
+            ["user_id", $this->id]
         ])->limit(1)->delete();
     }
 

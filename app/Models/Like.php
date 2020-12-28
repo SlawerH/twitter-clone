@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tweet extends Model
+class Like extends Model
 {
     use HasFactory;
 
@@ -15,11 +15,7 @@ class Tweet extends Model
      * @var array
      */
     protected $fillable = [
-        'content',
-        'user_id'
+        'tweet_id',
+        'user_id',
     ];
-
-    public function author() {
-        return $this->belongsTo(User::class, "user_id", "id");
-    }
 }
