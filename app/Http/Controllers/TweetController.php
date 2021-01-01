@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TweetRequest;
 use Illuminate\Support\Facades\Session;
 use App\Models\Tweet;
+use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 
 class TweetController extends Controller
@@ -17,7 +18,9 @@ class TweetController extends Controller
     public function show(Tweet $tweet) {
         $user = $tweet->author()->first();
 
-        return view("view", compact("tweet", "user"));
+        $likes = Like::where("tweet_id", $tweet->id)->count();
+
+        return view("view", compact("tweet", "user", "likes"));
     }
 
     public function store(TweetRequest $request) {

@@ -19,11 +19,13 @@
         </div>
     </div>
 
+    <p class="mt-3">{{ $likes }} like(s)</p>
+
     @if (Auth::check())
     @if (Auth::user()->liking($tweet))
-        <a href="{{ route("unlike", $tweet->id) }}" class="btn btn-danger mt-3">Unlike</a>
+        <a href="{{ route("unlike", $tweet->id) }}" class="btn btn-danger">Unlike</a>
     @else
-        <a href="{{ route("like", $tweet->id) }}" class="btn btn-success mt-3">Like</a>
+        <a href="{{ route("like", $tweet->id) }}" class="btn btn-success">Like</a>
     @endif
     @endif
 @endsection

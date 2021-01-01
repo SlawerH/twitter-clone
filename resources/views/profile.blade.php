@@ -19,14 +19,17 @@
             <h5 class="card-title">From <u><a href="{{ route("profile", $tweet->user_id) }}" class="text-bold">{{ $user->username }}</a></u></h5>
             <p class="text-muted">{{ $tweet->created_at }}</p>
             <p class="card-text">{{ $tweet->content }}</p>
-            @if (Auth::id() === $user->id)
-                <form method="POST" action="{{ route("delete_tweet", $tweet->id) }}">
-                    @csrf
-                    @method("delete")
-                    
-                    <input type="submit" value="Delete" class="btn btn-danger">
-                </form>
-            @endif
+            <div class="btn-group">
+                <a href="{{ route("view", $tweet->id) }}" class="btn btn-primary mr-2">View</a>
+                @if (Auth::id() === $user->id)
+                    <form method="POST" action="{{ route("delete_tweet", $tweet->id) }}">
+                        @csrf
+                        @method("delete")
+                        
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                @endif
+            </div>
         </div>
     </div>
 @endforeach

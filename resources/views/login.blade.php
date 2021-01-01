@@ -1,6 +1,6 @@
 @extends("layouts.app")
 
-@section("title", "Register")
+@section("title", "Login")
 
 @section('content')
     <div class="col-md-6 offset-md-3">
