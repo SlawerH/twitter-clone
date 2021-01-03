@@ -5,7 +5,9 @@
 @section('content')
     <h2>{{ $user->username }}</h2>
     
-    @if (Auth::id() !== $user->id)
+    <p><a href="{{ route("profile.followers", $user->id) }}"><b>{{ $followersCount }}</b> followers</a> &middot; <a href="{{ route("profile.following", $user->id) }}"><b>{{ $followingCount }}</b> following</a></p>
+
+    @if (Auth::user() && Auth::id() !== $user->id)
         @if (Auth::user()->following($user))
             <a href="{{ route("unfollow", $user->id) }}" class="btn btn-danger">Unfollow</a>
         @else  
