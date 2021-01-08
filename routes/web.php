@@ -38,6 +38,8 @@ Route::middleware("auth")->group(function() {
     Route::get("/unlike/{tweet}", "LikeController@unlike")->name("unlike");
 });
 
+Route::get("/explore", "ExploreController@index")->name("explore");
+
 Route::get("/view/{tweet}", "TweetController@show")->name("view");
 
 Route::get("/profile/{user}", "ProfileController@index")->name("profile");

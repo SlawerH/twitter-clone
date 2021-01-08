@@ -29,7 +29,7 @@ class TweetController extends Controller
             "user_id" => Auth::id()
         ]);
 
-        return redirect()->route("index"); // TODO: redirect to tweet
+        return redirect()->route("view", $tweet->id);
     }
 
     public function destroy(Tweet $tweet) {
