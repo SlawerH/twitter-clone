@@ -20,7 +20,7 @@ class TweetController extends Controller
 
         $likes = Like::where("tweet_id", $tweet->id)->count();
 
-        return view("view", compact("tweet", "user", "likes"));
+        return view("view.index", compact("tweet", "user", "likes"));
     }
 
     public function store(TweetRequest $request) {
@@ -42,5 +42,11 @@ class TweetController extends Controller
         Session::flash("alert-success", "Successfully deleted");
 
         return back();
+    }
+
+    public function likes(Tweet $tweet) {
+        $likes = Like::select("likes.*", "users.username")->join("users", "users.id", "=", "likes.user_id")->where("tweet_id", $tweet->id)->get();
+
+        return view("view.likes", compact("tweet", "likes"));
     }
 }

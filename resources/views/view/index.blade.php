@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <p class="mt-3">{{ $likes }} like(s)</p>
+    <p class="mt-3"><a href="{{ route("view.likes", $tweet->id) }}">{{ $likes }} like(s)</a></p>
 
     @if (Auth::check())
     @if (Auth::user()->liking($tweet))

@@ -41,6 +41,7 @@ Route::middleware("auth")->group(function() {
 Route::get("/explore", "ExploreController@index")->name("explore");
 
 Route::get("/view/{tweet}", "TweetController@show")->name("view");
+Route::get("/view/{tweet}/likes", "TweetController@likes")->name("view.likes");
 
 Route::get("/profile/{user}", "ProfileController@index")->name("profile");
 Route::get("/profile/{user}/followers", "ProfileController@followers")->name("profile.followers");
