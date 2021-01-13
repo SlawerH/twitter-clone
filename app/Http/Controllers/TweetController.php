@@ -41,7 +41,7 @@ class TweetController extends Controller
 
         Session::flash("alert-success", "Successfully deleted");
 
-        return back();
+        return redirect()->route("index");
     }
 
     public function likes(Tweet $tweet) {
